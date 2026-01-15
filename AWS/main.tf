@@ -72,6 +72,11 @@ resource "aws_instance" "strapi" {
   associate_public_ip_address = false
   ipv6_address_count          = 1
 
+  user_data = <<-EOF
+              #!/bin/bash
+              hostnamectl set-hostname lino-aws-fra-strapi-01
+              EOF
+
   root_block_device {
     volume_size = 16
     volume_type = "gp3"
@@ -79,7 +84,7 @@ resource "aws_instance" "strapi" {
   }
 
   tags = {
-    Name      = "lino-aws-fra-strapi-01-strapi"
+    Name      = "lino-aws-fra-strapi-01"
     Project   = "Lino-Cloud"
     ManagedBy = "Terraform"
   }
