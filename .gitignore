@@ -1,0 +1,21 @@
+# Terraform Verzeichnisse (Plugins und Cache)
+**/.terraform/*
+
+# Lokale State-Dateien (da wir jetzt S3 nutzen)
+*.tfstate
+*.tfstate.*
+
+# Crash logs
+crash.log
+
+# Terraform Variablen Dateien (falls du mal .tfvars nutzt)
+*.tfvars
+*.tfvars.json
+
+# Lokale AWS Credentials & Konfiguration (Sicherheit!)
+.aws/
+.env
+
+# Betriebssystem-spezifische Dateien
+.DS_Store
+Thumbs.db
