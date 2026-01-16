@@ -33,8 +33,8 @@ jobs:
 
       - name: Run Rover
         run: |
-          docker run --rm -v $(pwd):/src im2nguyen/rover:latest -planPath /src/tfplan -gen /src/rover.html
-          
+          docker run --rm -v $(pwd):/src im2nguyen/rover:latest -planPath /src/tfplan -standalone
+
       - name: Create Summary
         run: |
           echo "# 📝 Terraform Plan Summary" >> $GITHUB_STEP_SUMMARY
@@ -49,7 +49,7 @@ jobs:
           name: tf-artifacts
           path: |
             AWS/tfplan
-            AWS/rover.html
+            AWS/rover.zip
 
   terraform-apply:
     name: "Terraform Apply"
