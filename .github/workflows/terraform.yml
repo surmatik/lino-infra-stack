@@ -33,7 +33,7 @@ jobs:
 
       - name: Create Summary
         run: |
-          echo "## 📝 Terraform Plan Übersicht" >> $GITHUB_STEP_SUMMARY
+          echo "## 📝 Terraform Plan:" >> $GITHUB_STEP_SUMMARY
           terraform show -no-color tfplan >> $GITHUB_STEP_SUMMARY
 
       - name: Upload Plan
