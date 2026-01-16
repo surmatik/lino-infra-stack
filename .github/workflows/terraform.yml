@@ -31,16 +31,25 @@ jobs:
       - name: Terraform Plan
         run: terraform plan -input=false -out=tfplan
 
+      - name: Run Rover
+        run: |
+          docker run --rm -v $(pwd):/src im2nguyen/rover:latest -planPath /src/tfplan -gen /src/rover.html
+          
       - name: Create Summary
         run: |
-          echo "## 📝 Terraform Plan:" >> $GITHUB_STEP_SUMMARY
+          echo "# 📝 Terraform Plan Summary" >> $GITHUB_STEP_SUMMARY
+          echo "The visual diagram is available as a download under 'Artifacts' above." >> $GITHUB_STEP_SUMMARY
+          echo '```hcl' >> $GITHUB_STEP_SUMMARY
           terraform show -no-color tfplan >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
 
-      - name: Upload Plan
+      - name: Upload Plan Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: tfplan
-          path: AWS/tfplan
+          name: tf-artifacts
+          path: |
+            AWS/tfplan
+            AWS/rover.html
 
   terraform-apply:
     name: "Terraform Apply"
@@ -64,7 +73,7 @@ jobs:
       - name: Download Plan
         uses: actions/download-artifact@v4
         with:
-          name: tfplan
+          name: tf-artifacts
           path: AWS
 
       - name: Terraform Init
