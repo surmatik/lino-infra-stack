@@ -33,7 +33,11 @@ jobs:
 
       - name: Run Rover
         run: |
-          docker run --rm -v $(pwd):/src im2nguyen/rover:latest -planPath /src/tfplan -standalone
+          curl -LO https://github.com/im2nguyen/rover/releases/download/v0.3.3/rover_0.3.3_linux_amd64.zip
+          unzip rover_0.3.3_linux_amd64.zip
+          chmod +x rover_v0.3.3
+          sudo mv rover_v0.3.3 /usr/local/bin/rover
+          rover -planPath tfplan -standalone
 
       - name: Create Summary
         run: |
