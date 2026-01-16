@@ -37,7 +37,7 @@ jobs:
           unzip rover_0.3.3_linux_amd64.zip
           chmod +x rover_v0.3.3
           sudo mv rover_v0.3.3 /usr/local/bin/rover
-          rover -planPath tfplan -standalone
+          rover -planPath tfplan -standalone -tfPath $(which terraform)
 
       - name: Create Summary
         run: |
