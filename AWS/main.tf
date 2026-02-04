@@ -89,12 +89,3 @@ resource "aws_instance" "strapi" {
     ManagedBy = "Terraform"
   }
 }
-
-resource "aws_instance" "test_rejection" {
-  ami            = "ami-0e54675938402bb0b"
-  instance_type = "t3.nano"
-
-  tags = {
-    Name = "Test-Serer"
-  }
-}
